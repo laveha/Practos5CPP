@@ -93,50 +93,23 @@ int main() {
     cin >> accountChoice;
 
     if (accountChoice == 1) {
+        cout << "Баланс аккаунта A: " << a.getBalance() << endl;
         double amount;
-        int operationChoice;
-        cout << "Выбран аккаунт A. Выберите операцию (1 - пополнение, 2 - снятие, 3 - перевод): ";
-        cin >> operationChoice;
-
-        switch (operationChoice) {
-        case 1:
-            cout << "Введите сумму для пополнения: ";
-            cin >> amount;
-            a.deposit(amount);
-            break;
-        case 2:
-            cout << "Введите сумму для снятия: ";
-            cin >> amount;
-            a.withdraw(amount);
-            break;
-        case 3:
-            cout << "Введите сумму для перевода: ";
-            cin >> amount;
-            transfer(a, b, amount);
-            break;
-        default:
-            cout << "Ошибка: Неверная операция." << endl;
+        cout << "Введите сумму для перевода: ";
+        cin >> amount;
+        if (transfer(a, b, amount)) {
+            cout << "Баланс аккаунта A после перевода: " << a.getBalance() << endl;
+            cout << "Баланс аккаунта B после перевода: " << b.getBalance() << endl;
         }
     }
     else if (accountChoice == 2) {
+        cout << "Баланс аккаунта B: " << b.getBalance() << endl;
         double amount;
-        int operationChoice;
-        cout << "Выбран аккаунт B. Выберите операцию (1 - пополнение, 2 - снятие): ";
-        cin >> operationChoice;
-
-        switch (operationChoice) {
-        case 1:
-            cout << "Введите сумму для пополнения: ";
-            cin >> amount;
-            b.deposit(amount);
-            break;
-        case 2:
-            cout << "Введите сумму для снятия: ";
-            cin >> amount;
-            b.withdraw(amount);
-            break;
-        default:
-            cout << "Ошибка: Неверная операция." << endl;
+        cout << "Введите сумму для перевода: ";
+        cin >> amount;
+        if (transfer(b, a, amount)) {
+            cout << "Баланс аккаунта A после перевода: " << a.getBalance() << endl;
+            cout << "Баланс аккаунта B после перевода: " << b.getBalance() << endl;
         }
     }
     else {
