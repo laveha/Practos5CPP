@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 using namespace std;
 
 class BankAccount {
@@ -82,20 +82,66 @@ bool transfer(BankAccount& sender, BankAccount& receiver, double amount) {
     return false;
 }
 
-
 int main() {
     setlocale(LC_ALL, "Russian");
 
     BankAccount a(12345, 1000.0);
     BankAccount b(54321, 500.0);
 
-    cout << "Баланс первого аккаунта: " << a.getBalance() << endl;
-    cout << "Баланс второго аккаунта: " << b.getBalance() << endl;
+    int accountChoice;
+    cout << "Выберите аккаунт (1 - аккаунт А, 2 - аккаунт B): ";
+    cin >> accountChoice;
 
-    transfer(a, b, 505.8);
+    if (accountChoice == 1) {
+        double amount;
+        int operationChoice;
+        cout << "Выбран аккаунт A. Выберите операцию (1 - пополнение, 2 - снятие, 3 - перевод): ";
+        cin >> operationChoice;
 
-    cout << "Баланс первого аккаунта после перевода: " << a.getBalance() << endl;
-    cout << "Баланс второго аккаунта после перевода: " << b.getBalance() << endl;
+        switch (operationChoice) {
+        case 1:
+            cout << "Введите сумму для пополнения: ";
+            cin >> amount;
+            a.deposit(amount);
+            break;
+        case 2:
+            cout << "Введите сумму для снятия: ";
+            cin >> amount;
+            a.withdraw(amount);
+            break;
+        case 3:
+            cout << "Введите сумму для перевода: ";
+            cin >> amount;
+            transfer(a, b, amount);
+            break;
+        default:
+            cout << "Ошибка: Неверная операция." << endl;
+        }
+    }
+    else if (accountChoice == 2) {
+        double amount;
+        int operationChoice;
+        cout << "Выбран аккаунт B. Выберите операцию (1 - пополнение, 2 - снятие): ";
+        cin >> operationChoice;
+
+        switch (operationChoice) {
+        case 1:
+            cout << "Введите сумму для пополнения: ";
+            cin >> amount;
+            b.deposit(amount);
+            break;
+        case 2:
+            cout << "Введите сумму для снятия: ";
+            cin >> amount;
+            b.withdraw(amount);
+            break;
+        default:
+            cout << "Ошибка: Неверная операция." << endl;
+        }
+    }
+    else {
+        cout << "Ошибка: Неверный выбор аккаунта." << endl;
+    }
 
     return 0;
 }
